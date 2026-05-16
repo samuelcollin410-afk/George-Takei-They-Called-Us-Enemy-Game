@@ -35,19 +35,53 @@
     <button id="creditsBackBtn">Back</button>
   </section>
 
-  <section id="gameScreen" class="hidden screen">
-    <h1>Act 1: Loss of Normal Life</h1>
-    <p>The story begins at the Takei family home.</p>
-  </section>
+  <section id="gameScreen" class="hidden game-scene">
+
+  <img
+    src="./assets/door-scene.png"
+    class="scene-image"
+  >
+
+  <div class="scene-overlay">
+
+    <p class="scene-text">
+      Someone is at the door.
+    </p>
+
+    <div class="choice-buttons">
+
+      <button id="openDoorBtn">
+        Open the door
+      </button>
+
+      <button id="stayStillBtn">
+        Stay still
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 <div id="blackScreen" class="hidden">
-  <div id="bangText">BANG BANG BANG</div>
+
+  <div id="bangContainer">
+    <div class="bang bang1">BANG</div>
+    <div class="bang bang2">BANG</div>
+    <div class="bang bang3">BANG</div>
+  </div>
+
+  <div id="continueTip" class="hidden">
+    Click to continue
+  </div>
 
   <div id="locationText" class="hidden">
     1942<br>
     Los Angeles, California
   </div>
+<div id="introText" class="hidden"></div>
 </div>
 
  
