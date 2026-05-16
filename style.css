@@ -1,0 +1,364 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+
+  background: #686868;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
+
+/* TITLE SCREEN FRAME */
+
+.title-screen {
+  position: relative;
+
+  width: min(96vw, 1600px);
+  aspect-ratio: 16 / 9;
+
+  border: 8px solid #4a4a4a;
+  border-radius: 6px;
+
+  background-image: url("./assets/title-screen.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+/* BUTTON TEXT */
+
+
+.menu-buttons {
+  position: absolute;
+  inset: 0;
+}
+
+/* PLAY */
+
+#playBtn {
+  position: absolute;
+
+  left: 63.2%;
+  top: 62.8%;
+
+  width: 19%;
+  height: 8%;
+
+  background: transparent;
+  border: none;
+
+  font-size: 2.6rem;
+  font-weight: 700;
+  font-family: Georgia, serif;
+
+  color: #111;
+  cursor: pointer;
+}
+
+/* CREDITS */
+
+#creditsBtn {
+  position: absolute;
+
+  left: 63.2%;
+  top: 73.4%;
+
+  width: 19%;
+  height: 8%;
+
+  background: transparent;
+  border: none;
+
+  font-size: 2.6rem;
+  font-weight: 700;
+  font-family: Georgia, serif;
+
+  color: #111;
+  cursor: pointer;
+}
+
+/* EXTRA */
+
+#extraBtn {
+  position: absolute;
+
+  left: 63.2%;
+  top: 84.8%;
+
+  width: 19%;
+  height: 8%;
+
+  background: transparent;
+  border: none;
+
+  font-size: 2.6rem;
+  font-weight: 700;
+  font-family: Georgia, serif;
+
+  color: #111;
+  cursor: pointer;
+}
+/* OTHER SCREENS */
+
+.screen {
+  width: 100vw;
+  height: 100vh;
+
+  background: #1d1d1d;
+  color: #f1eadc;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  padding: 40px;
+}
+
+.screen h1 {
+  font-size: 4rem;
+  margin-bottom: 30px;
+}
+
+.screen p {
+  font-size: 1.4rem;
+  max-width: 900px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.screen button {
+  padding: 14px 28px;
+
+  font-size: 1.2rem;
+
+  border: none;
+  background: #d8c9a7;
+  color: #111;
+
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 25px;
+
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+.chapter-btn {
+  width: 500px;
+  padding: 22px;
+
+  font-size: 2rem;
+  font-family: Georgia, serif;
+  font-weight: 700;
+
+  background: #d8c9a7;
+  color: #111;
+
+  border: 4px solid #7d6a47;
+
+  cursor: pointer;
+
+  transition: 0.15s;
+}
+
+.chapter-btn:hover:not(.locked) {
+  transform: scale(1.03);
+}
+
+.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* BLACK TRANSITION SCREEN */
+
+#blackScreen {
+  position: fixed;
+
+  inset: 0;
+
+  background: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+
+  z-index: 999;
+
+  pointer-events: none;
+}
+
+/* SHOW SCREEN */
+
+#blackScreen.show {
+  animation: fadeToBlack 2s forwards;
+}
+
+/* TEXT */
+
+#bangText {
+  color: white;
+
+  font-size: 5rem;
+  font-weight: 700;
+
+  text-align: center;
+
+  opacity: 0;
+}
+
+/* TEXT APPEAR */
+
+#bangText.showText {
+  animation: textAppear 1s forwards;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeToBlack {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes textAppear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* ACTS BUTTON */
+
+#actsButton {
+  position: fixed;
+
+  top: 25px;
+  left: 25px;
+
+  padding: 12px 22px;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  border: 2px solid rgba(255,255,255,0.2);
+
+  color: white;
+
+  font-size: 1.2rem;
+  font-family: Georgia, serif;
+  font-weight: 700;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  z-index: 1000;
+
+  transition: 0.15s;
+}
+
+#actsButton:hover {
+  background: rgba(0,0,0,0.75);
+}
+#blackScreen {
+  position: fixed;
+  inset: 0;
+
+  background: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  z-index: 999;
+
+  cursor: pointer;
+}
+
+#blackScreen.show {
+  animation: fadeToBlack 2s forwards;
+}
+
+#bangText {
+  color: white;
+  font-size: 5rem;
+  font-weight: 800;
+  opacity: 0;
+}
+
+#bangText.showText {
+  animation: textAppear 1s forwards;
+}
+
+#bangText.swipeAway {
+  animation: swipeAway 0.8s forwards;
+}
+
+#locationText {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  opacity: 0;
+  line-height: 1.4;
+}
+
+#locationText.showLocation {
+  animation: textAppear 1s forwards;
+}
+
+@keyframes fadeToBlack {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes textAppear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes swipeAway {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-120vw);
+  }
+}
