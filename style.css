@@ -404,7 +404,7 @@ body {
 }
 
 #introText.showIntro {
-  animation: textAppear 0.8s forwards;
+  animation: textAppear 1.7s forwards;
 }
 
 #introText.fadeOutIntro {
@@ -467,82 +467,100 @@ body {
 
 .choice-buttons {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
 }
 
 .choice-buttons button {
-  padding: 16px 28px;
+  width: 360px;
+  padding: 16px 22px;
 
-  font-size: 1.1rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
 
   border: 2px solid #d8c9a7;
+  border-radius: 6px;
 
-  background: rgba(0,0,0,0.7);
-
+  background: rgba(0, 0, 0, 0.72);
   color: #f1eadc;
 
   cursor: pointer;
-
-  transition: 0.2s ease;
 }
 
 .choice-buttons button:hover {
-  background: rgba(255,255,255,0.12);
-
+  background: rgba(216, 201, 167, 0.18);
   transform: scale(1.03);
 }
 
-.game-scene {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: black;
-  overflow: hidden;
-}
+#resultBox {
+  max-width: 850px;
+  padding: 24px 32px;
 
-.scene-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.scene-overlay {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-
-  padding-bottom: 90px;
-
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.7),
-    rgba(0,0,0,0)
-  );
-}
-
-.scene-text {
-  color: white;
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
-
-.choice-buttons {
-  display: flex;
-  gap: 20px;
-}
-
-.choice-buttons button {
-  padding: 16px 28px;
-  font-size: 1.1rem;
-
+  background: rgba(0, 0, 0, 0.72);
   border: 2px solid #d8c9a7;
-  background: rgba(0,0,0,0.7);
+  border-radius: 8px;
+
   color: #f1eadc;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  text-align: center;
 
   cursor: pointer;
+}
+
+#resultBox.fadeIn {
+  animation: resultFadeIn 0.7s forwards;
+}
+
+@keyframes resultFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#resultBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  max-width: 850px;
+  padding: 28px 36px;
+
+  background: rgba(0, 0, 0, 0.78);
+  border: 2px solid #d8c9a7;
+
+  color: #f1eadc;
+  text-align: center;
+
+  font-size: 1.8rem;
+  line-height: 1.5;
+
+  cursor: pointer;
+}
+
+#resultBox.hidden {
+  display: none;
+}
+
+#choiceButtons.hidden {
+  display: none;
+}
+
+#sceneText.hidden {
+  display: none;
+}
+
+#choiceButtons.hidden {
+  display: none !important;
+}
+
+#sceneText.hidden {
+  display: none !important;
 }

@@ -35,33 +35,28 @@
     <button id="creditsBackBtn">Back</button>
   </section>
 
-  <section id="gameScreen" class="hidden game-scene">
-
-  <img
-    src="./assets/door-scene.png"
-    class="scene-image"
-  >
+<section id="gameScreen" class="hidden game-scene">
+  <img src="./assets/door-scene.png" class="scene-image">
 
   <div class="scene-overlay">
-
-    <p class="scene-text">
+    <p class="scene-text" id="sceneText">
       Someone is at the door.
     </p>
 
-    <div class="choice-buttons">
-
-      <button id="openDoorBtn">
-        Open the door
+    <div class="choice-buttons" id="choiceButtons">
+      <button id="askFatherBtn">
+        Ask your father what's happening
       </button>
 
-      <button id="stayStillBtn">
-        Stay still
+      <button id="stayQuietBtn">
+        Stay quiet
       </button>
-
     </div>
 
+    <div id="resultBox" class="hidden">
+      <p id="resultText"></p>
+    </div>
   </div>
-
 </section>
 
 

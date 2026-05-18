@@ -22,6 +22,14 @@ const bang2 = document.querySelector(".bang2");
 const bang3 = document.querySelector(".bang3");
 const introText = document.getElementById("introText");
 
+const sceneText = document.getElementById("sceneText");
+const choiceButtons = document.getElementById("choiceButtons");
+
+const askFatherBtn = document.getElementById("askFatherBtn");
+const stayQuietBtn = document.getElementById("stayQuietBtn");
+
+const resultBox = document.getElementById("resultBox");
+const resultText = document.getElementById("resultText");
 
 
 
@@ -30,8 +38,7 @@ const introText = document.getElementById("introText");
 
 
 
-
-
+let resultActive = false;
 
 let act1Step = 0;
 
@@ -201,6 +208,10 @@ blackScreen.addEventListener("click", () => {
 
         blackScreen.classList.add("hidden");
         blackScreen.classList.remove("show");
+sceneText.style.display = "block";
+choiceButtons.style.display = "flex";
+resultBox.classList.add("hidden");
+
 gameScreen.classList.remove("hidden");
       }
 
@@ -229,3 +240,92 @@ const introLines = [
 ];
 
 let introIndex = 0;
+
+const askFatherLines = [
+  "Father: “Stay with your mother, George.”",
+  "His voice is calm… but something feels wrong.",
+  "Your father slowly walks toward the front door and opens it."
+];
+
+const stayQuietLines = [
+  "You stay frozen behind your father, too nervous to speak.",
+  "Your father slowly walks toward the front door and opens it."
+];
+
+let currentResultLines = [];
+let currentResultIndex = 0;
+
+function startChoiceResult(lines) {
+  sceneText.style.display = "none";
+  choiceButtons.style.display = "none";
+
+  resultActive = true;
+
+  currentResultLines = lines;
+  currentResultIndex = 0;
+
+  resultText.textContent = currentResultLines[currentResultIndex];
+
+  resultBox.classList.remove("hidden");
+  resultBox.classList.remove("fadeIn");
+
+  void resultBox.offsetWidth;
+
+  resultBox.classList.add("fadeIn");
+}
+
+function nextResultLine() {
+  currentResultIndex++;
+
+  if (currentResultIndex < currentResultLines.length) {
+    resultBox.classList.remove("fadeIn");
+
+    setTimeout(() => {
+      resultText.textContent = currentResultLines[currentResultIndex];
+
+      void resultBox.offsetWidth;
+
+      resultBox.classList.add("fadeIn");
+    }, 150);
+
+  } else {
+    resultActive = false;
+    resultText.textContent = "The door opens.";
+
+    setTimeout(() => {
+      gameScreen.classList.add("hidden");
+
+      blackScreen.classList.remove("hidden");
+      blackScreen.classList.add("show");
+
+      locationText.classList.add("hidden");
+      continueTip.classList.add("hidden");
+
+      introText.innerText =
+        "Soldiers: “Under Executive Order 9066, you are instructed to leave immediately.”";
+
+      introText.classList.remove("hidden");
+      introText.classList.remove("fadeOutIntro");
+
+      void introText.offsetWidth;
+
+      introText.classList.add("showIntro");
+    }, 1200);
+  }
+}
+
+askFatherBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  startChoiceResult(askFatherLines);
+});
+
+stayQuietBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  startChoiceResult(stayQuietLines);
+});
+
+gameScreen.addEventListener("click", () => {
+  if (resultActive) {
+    nextResultLine();
+  }
+});
