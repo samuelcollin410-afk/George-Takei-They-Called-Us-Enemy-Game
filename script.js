@@ -284,7 +284,6 @@ function nextResultLine() {
       resultText.textContent = currentResultLines[currentResultIndex];
 
       void resultBox.offsetWidth;
-
       resultBox.classList.add("fadeIn");
     }, 150);
 
@@ -306,12 +305,34 @@ function nextResultLine() {
 
       introText.classList.remove("hidden");
       introText.classList.remove("fadeOutIntro");
+      introText.classList.remove("showIntro");
 
       void introText.offsetWidth;
-
       introText.classList.add("showIntro");
+
+      setTimeout(() => {
+        showOrderTip();
+      }, 4000);
+
     }, 1200);
   }
+}
+
+function showOrderTip() {
+  const oldTip = document.querySelector(".order-tip");
+  if (oldTip) oldTip.remove();
+
+  const orderTip = document.createElement("div");
+  orderTip.className = "order-tip";
+
+  orderTip.innerText =
+    "Executive Order 9066 was signed by President Franklin D. Roosevelt. It allowed the U.S. military to force Japanese Americans from their homes and send many of them to internment camps during WWII.";
+
+  document.body.appendChild(orderTip);
+
+  setTimeout(() => {
+    orderTip.classList.add("show");
+  }, 50);
 }
 
 askFatherBtn.addEventListener("click", (event) => {
