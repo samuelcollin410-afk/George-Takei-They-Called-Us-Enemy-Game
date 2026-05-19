@@ -31,15 +31,18 @@ const stayQuietBtn = document.getElementById("stayQuietBtn");
 const resultBox = document.getElementById("resultBox");
 const resultText = document.getElementById("resultText");
 
-
-
-
+const afterOrderScreen = document.getElementById("afterOrderScreen");
+const understandBtn = document.getElementById("understandBtn");
+const familyBtn = document.getElementById("familyBtn");
+const afterOrderResultBox = document.getElementById("afterOrderResultBox");
+const afterOrderResultText = document.getElementById("afterOrderResultText");
+const flashbackText = document.getElementById("flashbackText");
 
 
 
 
 let resultActive = false;
-
+let orderTipTimer = null;
 let act1Step = 0;
 
 function hideAllScreens() {
@@ -47,6 +50,7 @@ function hideAllScreens() {
   creditsScreen.classList.add("hidden");
   chapterScreen.classList.add("hidden");
   gameScreen.classList.add("hidden");
+afterOrderScreen.classList.add("hidden");
 }
 
 function resetOpening() {
@@ -69,6 +73,20 @@ bang3.classList.remove("hidden");
   continueTip.classList.add("hidden");
   continueTip.classList.remove("showTip");
 }
+
+function removeOrderTip() {
+  if (orderTipTimer) {
+    clearTimeout(orderTipTimer);
+    orderTipTimer = null;
+  }
+
+  const oldTip = document.querySelector(".order-tip");
+
+  if (oldTip) {
+    oldTip.remove();
+  }
+}
+
 
 playBtn.addEventListener("click", () => {
   hideAllScreens();
@@ -123,10 +141,66 @@ act1Btn.addEventListener("click", () => {
 
 blackScreen.addEventListener("click", () => {
 
+  /* AFTER EXECUTIVE ORDER */
+
+  if (act1Step === 4) {
+    act1Step = 5;
+
+    removeOrderTip();
+
+    continueTip.classList.add("hidden");
+    continueTip.classList.remove("showTip");
+
+    introText.classList.remove("showIntro");
+    introText.classList.add("fadeOutIntro");
+
+    setTimeout(() => {
+      introText.classList.add("hidden");
+      introText.classList.remove("fadeOutIntro");
+
+      introText.innerText =
+        "Your father lowers his head and nods.\n\n“We understand. We’ll be ready shortly.”\n\nThe door closes, leaving the room silent.";
+
+      introText.classList.remove("hidden");
+
+      void introText.offsetWidth;
+
+      introText.classList.add("showIntro");
+
+      continueTip.classList.remove("hidden");
+      continueTip.classList.add("showTip");
+    }, 500);
+
+    return;
+  }
+
+ /* AFTER FATHER COMPLIES */
+
+if (act1Step === 5) {
+  act1Step = 6;
+
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  introText.classList.remove("showIntro");
+  introText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+    blackScreen.classList.add("hidden");
+    blackScreen.classList.remove("show");
+
+    introText.classList.add("hidden");
+    introText.classList.remove("fadeOutIntro");
+
+    afterOrderScreen.classList.remove("hidden");
+  }, 500);
+
+  return;
+}
+
   /* AFTER BANGS */
 
   if (act1Step === 1) {
-
     act1Step = 2;
 
     continueTip.classList.add("hidden");
@@ -137,13 +211,11 @@ blackScreen.addEventListener("click", () => {
     bang3.classList.add("swipeAway");
 
     setTimeout(() => {
-  bang1.classList.add("hidden");
-  bang2.classList.add("hidden");
-  bang3.classList.add("hidden");
-}, 900);
-    
-    
-    
+      bang1.classList.add("hidden");
+      bang2.classList.add("hidden");
+      bang3.classList.add("hidden");
+    }, 900);
+
     setTimeout(() => {
       locationText.classList.remove("hidden");
       locationText.classList.add("showLocation");
@@ -158,13 +230,11 @@ blackScreen.addEventListener("click", () => {
   /* AFTER CALIFORNIA */
 
   if (act1Step === 2) {
-
     act1Step = 3;
 
     locationText.classList.add("fadeOutIntro");
 
     setTimeout(() => {
-
       locationText.classList.add("hidden");
       locationText.classList.remove("showLocation");
       locationText.classList.remove("fadeOutIntro");
@@ -176,6 +246,8 @@ blackScreen.addEventListener("click", () => {
       introText.classList.remove("hidden");
       introText.classList.add("showIntro");
 
+      continueTip.classList.remove("hidden");
+      continueTip.classList.add("showTip");
     }, 500);
 
     return;
@@ -184,38 +256,35 @@ blackScreen.addEventListener("click", () => {
   /* INTRO TEXT PROGRESSION */
 
   if (act1Step === 3) {
-
     introText.classList.remove("showIntro");
     introText.classList.add("fadeOutIntro");
 
     setTimeout(() => {
-
       introText.classList.remove("fadeOutIntro");
 
       introIndex++;
 
       if (introIndex < introLines.length) {
-
         introText.innerText = introLines[introIndex];
 
         void introText.offsetWidth;
 
         introText.classList.add("showIntro");
-
       } else {
-
         introText.classList.add("hidden");
 
         blackScreen.classList.add("hidden");
         blackScreen.classList.remove("show");
-sceneText.style.display = "block";
-choiceButtons.style.display = "flex";
-resultBox.classList.add("hidden");
 
-gameScreen.classList.remove("hidden");
+        sceneText.style.display = "block";
+        choiceButtons.style.display = "flex";
+        resultBox.classList.add("hidden");
+
+        gameScreen.classList.remove("hidden");
       }
-
     }, 500);
+
+    return;
   }
 
 });
@@ -225,7 +294,9 @@ actsButton.addEventListener("click", () => {
 
   resetOpening();
 
-  hideAllScreens();
+  removeOrderTip();
+  
+hideAllScreens();
   chapterScreen.classList.remove("hidden");
 
   actsButton.classList.add("hidden");
@@ -308,23 +379,33 @@ function nextResultLine() {
       introText.classList.remove("showIntro");
 
       void introText.offsetWidth;
+
       introText.classList.add("showIntro");
 
-      setTimeout(() => {
-        showOrderTip();
-      }, 4000);
+      act1Step = 4;
 
+continueTip.classList.remove("hidden");
+continueTip.classList.add("showTip");
+      
+      
+      
+removeOrderTip();
+
+orderTipTimer = setTimeout(() => {
+  if (act1Step === 4 && !blackScreen.classList.contains("hidden")) {
+    showOrderTip();
+  }
+}, 4000);
     }, 1200);
   }
 }
 
 function showOrderTip() {
-  const oldTip = document.querySelector(".order-tip");
-  if (oldTip) oldTip.remove();
+  removeOrderTip();
 
   const orderTip = document.createElement("div");
-  orderTip.className = "order-tip";
 
+  orderTip.className = "order-tip";
   orderTip.innerText =
     "Executive Order 9066 was signed by President Franklin D. Roosevelt. It allowed the U.S. military to force Japanese Americans from their homes and send many of them to internment camps during WWII.";
 
@@ -349,4 +430,37 @@ gameScreen.addEventListener("click", () => {
   if (resultActive) {
     nextResultLine();
   }
+});
+
+
+
+understandBtn.addEventListener("click", () => {
+  hideAllScreens();
+
+  blackScreen.classList.remove("hidden");
+  blackScreen.classList.add("show");
+
+  introText.classList.add("hidden");
+  continueTip.classList.add("hidden");
+  removeOrderTip();
+
+  flashbackText.classList.remove("hidden");
+  flashbackText.classList.remove("fadeOutIntro");
+  flashbackText.classList.remove("showFlashback");
+
+  void flashbackText.offsetWidth;
+
+  flashbackText.classList.add("showFlashback");
+
+  setTimeout(() => {
+    flashbackText.classList.add("fadeOutIntro");
+
+    setTimeout(() => {
+      flashbackText.classList.add("hidden");
+      flashbackText.classList.remove("showFlashback");
+      flashbackText.classList.remove("fadeOutIntro");
+
+      // next flashback text will go here later
+    }, 700);
+  }, 2200);
 });

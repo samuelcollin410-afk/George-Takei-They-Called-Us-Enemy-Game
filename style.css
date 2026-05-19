@@ -621,3 +621,54 @@ body {
 .order-tip.show {
   right: 24px;
 }
+
+.order-tip {
+  position: fixed;
+
+  top: 28px;
+  right: -390px;
+
+  width: 340px;
+  padding: 14px 16px;
+
+  background: rgba(18, 18, 18, 0.92);
+  border-left: 4px solid #d8c9a7;
+  border-top: 1px solid rgba(216, 201, 167, 0.55);
+  border-bottom: 1px solid rgba(216, 201, 167, 0.55);
+
+  color: #f1eadc;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.92rem;
+  line-height: 1.45;
+
+  z-index: 10001;
+
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+
+  transition: right 0.8s ease;
+}
+
+.order-tip.show {
+  right: 24px;
+}
+
+#flashbackText {
+  position: absolute;
+
+  color: white;
+
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 8px;
+
+  opacity: 0;
+}
+
+#flashbackText.showFlashback {
+  animation: textAppear 1.5s forwards;
+}
+
+#flashbackText.fadeOutIntro {
+  animation: introFadeOut 0.6s forwards;
+}

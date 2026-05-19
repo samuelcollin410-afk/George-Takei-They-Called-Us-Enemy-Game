@@ -59,6 +59,29 @@
   </div>
 </section>
 
+<section id="afterOrderScreen" class="hidden game-scene">
+  <img src="./assets/door-scene.png" class="scene-image">
+
+  <div class="scene-overlay">
+    <p class="scene-text" id="afterOrderText">
+      The room is silent. 
+    </p>
+
+    <div class="choice-buttons" id="afterOrderChoices">
+      <button id="understandBtn">
+        Try to understand what led to this
+      </button>
+
+      <button id="familyBtn">
+        Stay close to your family
+      </button>
+    </div>
+
+    <div id="afterOrderResultBox" class="hidden">
+      <p id="afterOrderResultText"></p>
+    </div>
+  </div>
+</section>
 
 <div id="blackScreen" class="hidden">
 
@@ -77,6 +100,7 @@
     Los Angeles, California
   </div>
 <div id="introText" class="hidden"></div>
+<div id="flashbackText" class="hidden">FLASHBACK</div>
 </div>
 
  
@@ -87,3 +111,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
