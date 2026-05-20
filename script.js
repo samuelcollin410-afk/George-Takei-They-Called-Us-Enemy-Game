@@ -493,7 +493,7 @@ orderTipTimer = setTimeout(() => {
   if (act1Step === 4 && !blackScreen.classList.contains("hidden")) {
     showOrderTip();
   }
-}, 4000);
+}, 2200);
     }, 1200);
   }
 }
