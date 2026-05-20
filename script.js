@@ -38,12 +38,18 @@ const afterOrderResultBox = document.getElementById("afterOrderResultBox");
 const afterOrderResultText = document.getElementById("afterOrderResultText");
 const flashbackText = document.getElementById("flashbackText");
 
+const flashbackIntro = document.getElementById("flashbackIntro");
 
+const pearlHarborScene = document.getElementById("pearlHarborScene");
+const harborTextBox = document.getElementById("harborTextBox");
 
 
 let resultActive = false;
 let orderTipTimer = null;
 let act1Step = 0;
+
+let flashbackIndex = 0;
+let flashbackActive = false;
 
 function hideAllScreens() {
   titleScreen.classList.add("hidden");
@@ -60,6 +66,12 @@ function resetOpening() {
   bang1.classList.remove("showBang", "swipeAway");
   bang2.classList.remove("showBang", "swipeAway");
   bang3.classList.remove("showBang", "swipeAway");
+
+   pearlHarborScene.classList.add("hidden");
+   pearlHarborScene.style.display = "none";
+
+   harborTextBox.classList.add("hidden");
+   harborTextBox.classList.remove("showBox");
 
   
   bang1.classList.remove("hidden");
@@ -120,6 +132,11 @@ act1Btn.addEventListener("click", () => {
 
   actsButton.classList.remove("hidden");
 
+  pearlHarborScene.classList.add("hidden");
+  pearlHarborScene.style.display = "none";
+  harborTextBox.classList.add("hidden");
+  
+  
   blackScreen.classList.remove("hidden");
   blackScreen.classList.add("show");
 
@@ -287,6 +304,78 @@ if (act1Step === 5) {
     return;
   }
 
+
+/* AFTER FAMILY INTRO */
+
+if (act1Step === 7) {
+  act1Step = 8;
+
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  flashbackIntro.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+    flashbackIntro.classList.add("hidden");
+    flashbackIntro.classList.remove("showIntro");
+    flashbackIntro.classList.remove("fadeOutIntro");
+
+    pearlHarborScene.style.display = "flex";
+    pearlHarborScene.classList.remove("hidden");
+
+    setTimeout(() => {
+      harborTextBox.classList.remove("hidden");
+      harborTextBox.classList.add("showBox");
+
+      continueTip.classList.remove("hidden");
+      continueTip.classList.add("showTip");
+
+      flashbackActive = true;
+      flashbackIndex = -1;
+    }, 2000);
+
+  }, 600);
+
+  return;
+}
+
+
+/* FLASHBACK TEXT PAGES */
+
+if (flashbackActive && act1Step === 8) {
+
+  harborTextBox.classList.add("hidden");
+  harborTextBox.classList.remove("showBox");
+
+  pearlHarborScene.classList.add("hidden");
+  pearlHarborScene.style.display = "none";
+
+  flashbackIndex++;
+
+  if (flashbackIndex < flashbackLines.length) {
+
+    flashbackIntro.innerText = flashbackLines[flashbackIndex];
+
+    flashbackIntro.classList.remove("hidden");
+    flashbackIntro.classList.remove("fadeOutIntro");
+
+    void flashbackIntro.offsetWidth;
+
+    flashbackIntro.classList.add("showIntro");
+
+  } else {
+
+    flashbackActive = false;
+
+    flashbackIntro.classList.add("hidden");
+
+    // PAGE 7 goes here later
+  }
+
+  return;
+}
+
+
 });
 
 actsButton.addEventListener("click", () => {
@@ -309,6 +398,15 @@ const introLines = [
 
   "Soon, George and his family will be forced to leave behind everything they know."
 ];
+
+const flashbackLines = [
+  "After the attack, fear spread rapidly across the United States.\n\nMany Japanese Americans were suddenly treated with suspicion, even if they had lived in America their entire lives.",
+
+  "Assistant Secretary of War John J. McCloy and other government leaders argued that Japanese Americans could not be trusted, even without evidence.",
+
+  "On February 19, 1942, President Franklin D. Roosevelt signed Executive Order 9066."
+];
+
 
 let introIndex = 0;
 
@@ -442,7 +540,46 @@ understandBtn.addEventListener("click", () => {
 
   introText.classList.add("hidden");
   continueTip.classList.add("hidden");
+
   removeOrderTip();
+
+  flashbackText.classList.remove("hidden");
+  flashbackText.classList.add("showFlashback");
+
+  setTimeout(() => {
+    flashbackText.classList.add("fadeOutIntro");
+
+    setTimeout(() => {
+      flashbackText.classList.add("hidden");
+      flashbackText.classList.remove("showFlashback");
+      flashbackText.classList.remove("fadeOutIntro");
+
+      flashbackIntro.innerHTML = `
+        December 7, 1941<br><br>
+
+        George Takei lived in Los Angeles with his father Takekuma,
+        his mother Fumiko, his younger brother Henry,
+        and his baby sister Nancy.<br><br>
+
+        At first, it seemed like an ordinary day.
+      `;
+
+      flashbackIntro.classList.remove("hidden");
+      flashbackIntro.classList.add("showIntro");
+
+      act1Step = 7;
+
+      continueTip.classList.remove("hidden");
+      continueTip.classList.add("showTip");
+    }, 700);
+  }, 2200);
+});
+
+function startFlashback() {
+  hideAllScreens();
+
+  blackScreen.classList.remove("hidden");
+  blackScreen.classList.add("show");
 
   flashbackText.classList.remove("hidden");
   flashbackText.classList.remove("fadeOutIntro");
@@ -460,7 +597,21 @@ understandBtn.addEventListener("click", () => {
       flashbackText.classList.remove("showFlashback");
       flashbackText.classList.remove("fadeOutIntro");
 
-      // next flashback text will go here later
+      flashbackIntro.innerHTML = `
+        December 7, 1941<br><br>
+        George Takei lived in Los Angeles with his father Takekuma,
+        his mother Fumiko, his younger brother Henry,
+        and his baby sister Nancy.<br><br>
+        At first, it seemed like an ordinary day.
+      `;
+
+      flashbackIntro.classList.remove("hidden");
+      flashbackIntro.classList.add("showIntro");
+
+      continueTip.classList.remove("hidden");
+      continueTip.classList.add("showTip");
+
+      act1Step = 7;
     }, 700);
   }, 2200);
-});
+}
