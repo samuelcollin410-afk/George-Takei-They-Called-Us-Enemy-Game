@@ -42,7 +42,11 @@ const flashbackIntro = document.getElementById("flashbackIntro");
 
 const pearlHarborScene = document.getElementById("pearlHarborScene");
 const harborTextBox = document.getElementById("harborTextBox");
+const act2Btn = document.getElementById("act2Btn");
 
+const rohwerMapScene = document.getElementById("rohwerMapScene");
+
+let act2Unlocked = false;
 
 let resultActive = false;
 let orderTipTimer = null;
@@ -51,12 +55,26 @@ let act1Step = 0;
 let flashbackIndex = 0;
 let flashbackActive = false;
 
+
+
+function unlockAct2() {
+  act2Unlocked = true;
+
+  act2Btn.disabled = false;
+  act2Btn.classList.remove("locked");
+  act2Btn.textContent = "Life Inside Rohwer (Act 2)";
+}
+
 function hideAllScreens() {
   titleScreen.classList.add("hidden");
   creditsScreen.classList.add("hidden");
   chapterScreen.classList.add("hidden");
   gameScreen.classList.add("hidden");
 afterOrderScreen.classList.add("hidden");
+rohwerMapScene.classList.add("hidden");
+rohwerMapScene.classList.remove("showMap");
+
+
 }
 
 function resetOpening() {
@@ -73,7 +91,10 @@ function resetOpening() {
    harborTextBox.classList.add("hidden");
    harborTextBox.classList.remove("showBox");
 
-  
+  rohwerMapScene.classList.add("hidden");
+rohwerMapScene.classList.remove("showMap");
+
+
   bang1.classList.remove("hidden");
  bang2.classList.remove("hidden");
 bang3.classList.remove("hidden");
@@ -111,7 +132,21 @@ creditsBtn.addEventListener("click", () => {
 });
 
 extraBtn.addEventListener("click", () => {
-  alert("This can later become Settings, Gallery, or Bonus Content.");
+
+  const unlockAll = confirm(
+    "Unlock all acts?"
+  );
+
+  if (unlockAll) {
+
+    unlockAct2();
+
+    const act3Btn = document.querySelectorAll(".chapter-btn")[2];
+
+    act3Btn.disabled = false;
+    act3Btn.classList.remove("locked");
+    act3Btn.textContent = "Tule Lake / Aftermath (Act 3)";
+  }
 });
 
 chapterBackBtn.addEventListener("click", () => {
@@ -158,38 +193,144 @@ act1Btn.addEventListener("click", () => {
 
 blackScreen.addEventListener("click", () => {
 
-  /* AFTER EXECUTIVE ORDER */
+ if (act1Step === 20) {
+  act1Step = 21;
 
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  introText.classList.remove("showIntro");
+  introText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+    introText.classList.add("hidden");
+    introText.classList.remove("fadeOutIntro");
+
+ rohwerMapScene.classList.remove("hidden");
+rohwerMapScene.classList.add("showMap");
+    continueTip.classList.remove("hidden");
+    continueTip.classList.add("showTip");
+  }, 600);
+
+  return;
+}
+ 
+
+ 
+  if (act1Step === 9) {
+  act1Step = 10;
+
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  introText.classList.remove("showIntro");
+  introText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+    introText.classList.add("hidden");
+    introText.classList.remove("fadeOutIntro");
+
+    introText.innerText = "Why us?";
+
+    introText.classList.remove("hidden");
+
+    void introText.offsetWidth;
+
+    introText.classList.add("showIntro");
+
+    continueTip.classList.remove("hidden");
+    continueTip.classList.add("showTip");
+  }, 500);
+
+  return;
+}
+
+if (act1Step === 10) {
+  act1Step = 11;
+
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  introText.classList.remove("showIntro");
+  introText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+    introText.classList.add("hidden");
+    introText.classList.remove("fadeOutIntro");
+
+  introText.innerText = "Act 1 Finished\n\nContinue to Act 2";
+
+    introText.classList.remove("hidden");
+
+    void introText.offsetWidth;
+
+    introText.classList.add("showIntro");
+
+    continueTip.classList.remove("hidden");
+    continueTip.classList.add("showTip");
+
+    unlockAct2();
+  }, 500);
+
+  return;
+}
+
+if (act1Step === 11) {
+  blackScreen.classList.add("hidden");
+  blackScreen.classList.remove("show");
+
+  introText.classList.add("hidden");
+  introText.classList.remove("showIntro");
+
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  unlockAct2();
+
+  hideAllScreens();
+  chapterScreen.classList.remove("hidden");
+
+  return;
+}
+  
+  
   if (act1Step === 4) {
-    act1Step = 5;
+  act1Step = 5;
 
-    removeOrderTip();
+  removeOrderTip();
 
-    continueTip.classList.add("hidden");
-    continueTip.classList.remove("showTip");
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
 
-    introText.classList.remove("showIntro");
-    introText.classList.add("fadeOutIntro");
+  introText.classList.remove("showIntro");
+  introText.classList.add("fadeOutIntro");
 
-    setTimeout(() => {
-      introText.classList.add("hidden");
-      introText.classList.remove("fadeOutIntro");
+  setTimeout(() => {
+    introText.classList.add("hidden");
+    introText.classList.remove("fadeOutIntro");
 
-      introText.innerText =
-        "Your father lowers his head and nods.\n\n“We understand. We’ll be ready shortly.”\n\nThe door closes, leaving the room silent.";
+  introText.innerText =
+  "Your father lowers his head and nods.\n\n“We understand. We’ll be ready shortly.”\n\nThe door closes, leaving the room silent.";
 
-      introText.classList.remove("hidden");
+introText.style.display = "block";
 
-      void introText.offsetWidth;
+introText.classList.remove("hidden");
+introText.classList.remove("showIntro");
+introText.classList.remove("fadeOutIntro");
 
-      introText.classList.add("showIntro");
+void introText.offsetWidth;
 
-      continueTip.classList.remove("hidden");
-      continueTip.classList.add("showTip");
-    }, 500);
+introText.classList.add("showIntro");
 
-    return;
-  }
+    continueTip.classList.remove("hidden");
+    continueTip.classList.add("showTip");
+  }, 500);
+
+  return;
+}
+  
+  
+
 
  /* AFTER FATHER COMPLIES */
 
@@ -343,7 +484,6 @@ if (act1Step === 7) {
 /* FLASHBACK TEXT PAGES */
 
 if (flashbackActive && act1Step === 8) {
-
   harborTextBox.classList.add("hidden");
   harborTextBox.classList.remove("showBox");
 
@@ -353,7 +493,6 @@ if (flashbackActive && act1Step === 8) {
   flashbackIndex++;
 
   if (flashbackIndex < flashbackLines.length) {
-
     flashbackIntro.innerText = flashbackLines[flashbackIndex];
 
     flashbackIntro.classList.remove("hidden");
@@ -362,18 +501,32 @@ if (flashbackActive && act1Step === 8) {
     void flashbackIntro.offsetWidth;
 
     flashbackIntro.classList.add("showIntro");
+} else {
+  flashbackActive = false;
 
-  } else {
+  flashbackIntro.classList.add("hidden");
+  flashbackIntro.classList.remove("showIntro");
+  flashbackIntro.classList.remove("fadeOutIntro");
 
-    flashbackActive = false;
+  introText.innerText = "Returning to George’s home...";
 
-    flashbackIntro.classList.add("hidden");
+  introText.classList.remove("hidden");
+  introText.classList.remove("fadeOutIntro");
+  introText.classList.remove("showIntro");
 
-    // PAGE 7 goes here later
-  }
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  continueTip.classList.remove("hidden");
+  continueTip.classList.add("showTip");
+
+  act1Step = 9;
+}
 
   return;
 }
+
 
 
 });
@@ -615,3 +768,60 @@ function startFlashback() {
     }, 700);
   }, 2200);
 }
+
+
+
+
+function unlockAct2() {
+  act2Unlocked = true;
+
+  act2Btn.disabled = false;
+  act2Btn.classList.remove("locked");
+  act2Btn.textContent = "Life Inside Rohwer (Act 2)";
+}
+
+familyBtn.addEventListener("click", () => {
+  hideAllScreens();
+
+  blackScreen.classList.remove("hidden");
+  blackScreen.classList.add("show");
+
+  introText.innerText = "Why us?";
+
+  introText.classList.remove("hidden");
+  introText.classList.remove("fadeOutIntro");
+  introText.classList.remove("showIntro");
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  continueTip.classList.remove("hidden");
+  continueTip.classList.add("showTip");
+
+  act1Step = 10;
+});
+
+act2Btn.addEventListener("click", () => {
+  if (!act2Unlocked) return;
+
+  hideAllScreens();
+
+  blackScreen.classList.remove("hidden");
+  blackScreen.classList.add("show");
+
+  introText.innerText = "ACT 2\nLife Inside Rohwer";
+
+  introText.classList.remove("hidden");
+  introText.classList.remove("fadeOutIntro");
+  introText.classList.remove("showIntro");
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  continueTip.classList.remove("hidden");
+  continueTip.classList.add("showTip");
+
+  act1Step = 20;
+});

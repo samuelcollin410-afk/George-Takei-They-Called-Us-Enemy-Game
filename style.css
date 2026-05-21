@@ -528,7 +528,7 @@ body {
   top: 50%;
   left: 50%;
 
-  transform: translate(-50%, -50%);
+ 
 
   max-width: 850px;
   padding: 28px 36px;
@@ -749,4 +749,91 @@ body {
   to {
     opacity: 1;
   }
+}
+
+#rohwerMapScene {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#rohwerMapImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#rohwerTextBox {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+
+  width: 360px;
+  padding: 18px 22px;
+
+  background: rgba(0, 0, 0, 0.78);
+  border: 2px solid #d8c9a7;
+
+  color: #f1eadc;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  text-align: left;
+  font-family: Georgia, "Times New Roman", serif;
+
+  z-index: 10;
+}
+
+#rohwerMapScene {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  background: black;
+
+  z-index: 5;
+}
+
+#rohwerMapImage {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+#rohwerTextBox {
+  position: absolute;
+
+  top: 40px;
+  left: 40px;
+
+  width: 360px;
+
+  padding: 18px 22px;
+
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #d8c9a7;
+
+  color: #f1eadc;
+
+  font-size: 1.35rem;
+  line-height: 1.45;
+
+  font-family: Georgia, serif;
+
+  z-index: 20;
+}
+
+#rohwerMapScene.showMap {
+  display: flex !important;
 }
