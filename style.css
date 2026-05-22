@@ -1108,3 +1108,95 @@ body {
 #sewingScene.hidden {
   display: none !important;
 }
+
+#questionnaireScene {
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 6000;
+}
+
+#questionnaireScene.hidden {
+  display: none !important;
+}
+
+#questionnaireImage {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+}
+
+.checkBox {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 7000;
+}
+
+.checkBox.selected::after {
+  content: "X";
+  position: absolute;
+  inset: 0;
+  color: black;
+  font-size: 55px;
+  font-weight: bold;
+  line-height: 55px;
+  text-align: center;
+}
+
+/* adjust these if needed */
+#q27Yes {
+  top: 40%;
+  left: 71.1%;
+}
+#q27No {
+  top: 40%;
+  left: 78.4%;
+}
+
+#q28Yes {
+  top: 70%;
+  left: 71.1%;
+}
+#q28No {
+  top: 70%;
+  left: 78.4%;
+}
+
+#submitQuestionnaireBtn {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 30px;
+  background: #d8c9a7;
+  border: 2px solid #111;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 7000;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#rohwerArrivalScene.hidden,
+#rohwerMapScene.hidden,
+#kidsGameScene.hidden,
+#sewingScene.hidden,
+#questionnaireScene.hidden {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+#questionnaireScene {
+  z-index: 999999 !important;
+}
+
+#walkAroundText.hidden {
+  display: none !important;
+}

@@ -71,6 +71,17 @@ const kidsReflectionTip =
   document.getElementById("sewingScene");
   
   
+const questionnaireScene = document.getElementById("questionnaireScene");
+const q27Yes = document.getElementById("q27Yes");
+const q27No = document.getElementById("q27No");
+const q28Yes = document.getElementById("q28Yes");
+const q28No = document.getElementById("q28No");
+const submitQuestionnaireBtn = document.getElementById("submitQuestionnaireBtn");
+
+let q27Answer = "";
+let q28Answer = "";
+
+
   
   let act2Unlocked = false;
 let rohwerWalkStep = 0;
@@ -91,6 +102,18 @@ function unlockAct2() {
   act2Btn.textContent = "Life Inside Rohwer (Act 2)";
 }
 
+function unlockAct3() {
+
+  const act3Btn =
+    document.querySelectorAll(".chapter-btn")[2];
+
+  act3Btn.disabled = false;
+
+  act3Btn.classList.remove("locked");
+
+  act3Btn.textContent =
+    "Tule Lake / Aftermath (Act 3)";
+}
 
 lookAroundBtn.addEventListener("click", () => {
 
@@ -321,6 +344,91 @@ act1Btn.addEventListener("click", () => {
 });
 
 blackScreen.addEventListener("click", () => {
+console.log("blackScreen clicked", {
+  rohwerWalkStep,
+  act1Step
+});
+
+
+
+if (rohwerWalkStep === 102) {
+  walkAroundText.classList.add("hidden");
+  walkAroundText.classList.remove("showText");
+  walkAroundText.style.display = "none";
+
+  questionnaireScene.classList.remove("hidden");
+  questionnaireScene.style.display = "block";
+  questionnaireScene.style.zIndex = "999999";
+
+  rohwerWalkStep = 103;
+
+  return;
+}
+
+
+if (rohwerWalkStep === 101) {
+
+  walkAroundText.classList.remove("showText");
+  walkAroundText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+
+    walkAroundText.classList.remove("fadeOutIntro");
+
+    walkAroundText.innerHTML =
+      "You will now take the role of George Takei’s father, Takekuma Takei, and answer the questionnaire that could decide your family’s future.";
+
+    void walkAroundText.offsetWidth;
+
+    walkAroundText.classList.add("showText");
+
+  }, 600);
+
+  rohwerWalkStep = 102;
+
+  return;
+}
+
+
+if (rohwerWalkStep === 9 || rohwerWalkStep === 53) {
+
+  walkAroundText.classList.remove("showText");
+  walkAroundText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+    walkAroundText.classList.remove("fadeOutIntro");
+
+    walkAroundText.innerHTML =
+      "One day, the government handed everyone a questionnaire that changed everything.";
+
+    void walkAroundText.offsetWidth;
+    walkAroundText.classList.add("showText");
+  }, 600);
+
+  rohwerWalkStep = 100;
+
+  return;
+}
+
+if (rohwerWalkStep === 100) {
+
+  walkAroundText.classList.remove("showText");
+  walkAroundText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+    walkAroundText.classList.remove("fadeOutIntro");
+
+    walkAroundText.innerHTML =
+      "The questionnaire asked Japanese Americans to prove they were loyal to the United States. Soon, two questions began dividing families inside the camps.";
+
+    void walkAroundText.offsetWidth;
+    walkAroundText.classList.add("showText");
+  }, 600);
+
+  rohwerWalkStep = 101;
+
+  return;
+}
 
 
 if (rohwerWalkStep === 52) {
@@ -1207,3 +1315,55 @@ if (sewingScene) {
     rohwerWalkStep = 9;
   });
 }
+
+
+
+function selectQuestion(question, answer) {
+  if (question === 27) {
+    q27Answer = answer;
+    q27Yes.classList.toggle("selected", answer === "yes");
+    q27No.classList.toggle("selected", answer === "no");
+  }
+
+  if (question === 28) {
+    q28Answer = answer;
+    q28Yes.classList.toggle("selected", answer === "yes");
+    q28No.classList.toggle("selected", answer === "no");
+  }
+}
+
+q27Yes.addEventListener("click", () => selectQuestion(27, "yes"));
+q27No.addEventListener("click", () => selectQuestion(27, "no"));
+q28Yes.addEventListener("click", () => selectQuestion(28, "yes"));
+q28No.addEventListener("click", () => selectQuestion(28, "no"));
+
+submitQuestionnaireBtn.addEventListener("click", () => {
+  if (!q27Answer || !q28Answer) {
+    alert("Answer both questions first.");
+    return;
+  }
+
+questionnaireScene.classList.add("hidden");
+
+walkAroundText.style.display = "block";
+
+walkAroundText.classList.remove("hidden");
+walkAroundText.classList.remove("showText");
+
+if (q27Answer === "yes" && q28Answer === "yes") {
+
+  walkAroundText.innerHTML =
+    "You answered Yes-Yes. Your family was seen as loyal, and spent the remaining years of the war in the Rohwer internment camp.";
+
+} else {
+
+  walkAroundText.innerHTML =
+    "Your answers were seen as disloyal. Your family was transferred to the Tule Lake Segregation Center.\n\nAct 2 Finished\n\nContinue to Act 3";
+
+  unlockAct3();
+
+}
+
+  void walkAroundText.offsetWidth;
+  walkAroundText.classList.add("showText");
+});
