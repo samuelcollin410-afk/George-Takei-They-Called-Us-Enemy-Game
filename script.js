@@ -46,8 +46,34 @@ const act2Btn = document.getElementById("act2Btn");
 
 const rohwerMapScene = document.getElementById("rohwerMapScene");
 
-let act2Unlocked = false;
+const rohwerArrivalScene = document.getElementById("rohwerArrivalScene");
+const mapContinueBtn = document.getElementById("mapContinueBtn");
 
+const rohwerArrivalTextBox = document.getElementById("rohwerArrivalTextBox");
+
+const rohwerChoices = document.getElementById("rohwerChoices");
+
+const lookAroundBtn = document.getElementById("lookAroundBtn");
+
+const stayFamilyBtn = document.getElementById("stayFamilyBtn");
+
+const walkAroundText = document.getElementById("walkAroundText");
+
+const kidsGameScene =
+  document.getElementById("kidsGameScene");
+
+
+
+const kidsReflectionTip =
+  document.getElementById("kidsReflectionTip");
+  
+  const sewingScene =
+  document.getElementById("sewingScene");
+  
+  
+  
+  let act2Unlocked = false;
+let rohwerWalkStep = 0;
 let resultActive = false;
 let orderTipTimer = null;
 let act1Step = 0;
@@ -65,21 +91,124 @@ function unlockAct2() {
   act2Btn.textContent = "Life Inside Rohwer (Act 2)";
 }
 
+
+lookAroundBtn.addEventListener("click", () => {
+
+  rohwerChoices.classList.add("hidden");
+
+  rohwerArrivalScene.style.animation =
+    "introFadeOut 0.8s forwards";
+
+  setTimeout(() => {
+
+    rohwerArrivalScene.classList.add("hidden");
+
+    blackScreen.style.background = "black";
+
+    walkAroundText.classList.remove("hidden");
+    walkAroundText.classList.add("showText");
+
+    walkAroundText.innerHTML =
+      "As I walked around, I saw many other families who looked tired and unhappy.";
+
+    rohwerWalkStep = 1;
+
+  }, 800);
+});
+
+if (stayFamilyBtn) {
+  stayFamilyBtn.addEventListener("click", () => {
+
+    rohwerChoices.classList.add("hidden");
+
+    rohwerArrivalScene.style.animation =
+      "introFadeOut 0.8s forwards";
+
+    setTimeout(() => {
+
+      rohwerArrivalScene.classList.add("hidden");
+
+      blackScreen.style.background = "black";
+
+      walkAroundText.classList.remove("hidden");
+      walkAroundText.classList.remove("showText");
+
+      walkAroundText.innerHTML =
+        "I decided to stay beside my family. My father immediately began helping both our family and the families living nearby.";
+
+      void walkAroundText.offsetWidth;
+
+      walkAroundText.classList.add("showText");
+
+      rohwerWalkStep = 50;
+
+    }, 800);
+  });
+}
+
+
+
 function hideAllScreens() {
+ rohwerWalkStep = 0;
   titleScreen.classList.add("hidden");
   creditsScreen.classList.add("hidden");
   chapterScreen.classList.add("hidden");
   gameScreen.classList.add("hidden");
-afterOrderScreen.classList.add("hidden");
-rohwerMapScene.classList.add("hidden");
-rohwerMapScene.classList.remove("showMap");
+  afterOrderScreen.classList.add("hidden");
 
-
+if (sewingScene) {
+  sewingScene.classList.add("hidden");
 }
 
+  if (rohwerMapScene) {
+    rohwerMapScene.classList.add("hidden");
+    rohwerMapScene.classList.remove("showMap");
+  }
+
+  if (rohwerArrivalScene) {
+    rohwerArrivalScene.classList.add("hidden");
+    rohwerArrivalScene.classList.remove("showArrival");
+    rohwerArrivalScene.style.display = "none";
+  }
+
+  if (rohwerChoices) {
+    rohwerChoices.classList.add("hidden");
+    rohwerChoices.style.display = "none";
+  }
+
+  if (rohwerArrivalTextBox) {
+    rohwerArrivalTextBox.classList.remove("hidden");
+  }
+
+  if (kidsGameScene) {
+    kidsGameScene.classList.add("hidden");
+  }
+
+  if (kidsReflectionTip) {
+    kidsReflectionTip.classList.add("hidden");
+  }
+}
 function resetOpening() {
+ rohwerWalkStep = 0;
   blackScreen.classList.remove("show");
   blackScreen.classList.add("hidden");
+
+if (rohwerChoices) {
+  rohwerChoices.style.display = "none";
+  rohwerChoices.classList.add("hidden");
+}
+
+if (sewingScene) {
+  sewingScene.classList.add("hidden");
+}
+
+if (rohwerArrivalTextBox) {
+  rohwerArrivalTextBox.classList.remove("hidden");
+}
+
+rohwerArrivalScene.classList.add("hidden");
+rohwerArrivalScene.classList.remove("showArrival");
+rohwerArrivalScene.style.display = "none";
 
   bang1.classList.remove("showBang", "swipeAway");
   bang2.classList.remove("showBang", "swipeAway");
@@ -193,7 +322,177 @@ act1Btn.addEventListener("click", () => {
 
 blackScreen.addEventListener("click", () => {
 
- if (act1Step === 20) {
+
+if (rohwerWalkStep === 52) {
+
+  walkAroundText.classList.remove("showText");
+  walkAroundText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+
+    walkAroundText.classList.remove("fadeOutIntro");
+
+    walkAroundText.innerHTML =
+      "However, no matter where we went in the jeep, we could never leave the camp.";
+
+    void walkAroundText.offsetWidth;
+
+    walkAroundText.classList.add("showText");
+
+  }, 600);
+
+  rohwerWalkStep = 53;
+
+  return;
+}
+
+
+if (rohwerWalkStep === 51) {
+
+  walkAroundText.classList.remove("showText");
+  walkAroundText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+
+    walkAroundText.classList.remove("fadeOutIntro");
+
+    walkAroundText.innerHTML =
+  "Since my father was block manager, the rest of my family and I were sometimes allowed to ride around the camp with him in a jeep. Traveling through Rohwer showed me just how large the camp really was.";
+
+    void walkAroundText.offsetWidth;
+
+    walkAroundText.classList.add("showText");
+
+  }, 600);
+
+  rohwerWalkStep = 52;
+
+  return;
+}
+
+if (rohwerWalkStep === 50) {
+
+  walkAroundText.classList.remove("showText");
+  walkAroundText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+
+    walkAroundText.classList.remove("fadeOutIntro");
+
+    walkAroundText.innerHTML =
+      "Eventually, the other families began depending on him, and he was promoted to block manager.";
+
+    void walkAroundText.offsetWidth;
+
+    walkAroundText.classList.add("showText");
+
+  }, 600);
+
+  rohwerWalkStep = 51;
+
+  return;
+}
+
+
+  if (rohwerWalkStep === 1) {
+    walkAroundText.innerHTML =
+      "Eventually, I ran into other kids playing a game...";
+
+    rohwerWalkStep = 2;
+    return;
+  }
+
+  if (rohwerWalkStep === 2) {
+    walkAroundText.classList.add("hidden");
+    walkAroundText.classList.remove("showText");
+
+    kidsGameScene.classList.remove("hidden");
+
+    rohwerWalkStep = 3;
+    return;
+  }
+
+  if (rohwerWalkStep === 4) {
+    kidsReflectionTip.classList.remove("hidden");
+    kidsReflectionTip.classList.add("showTipBox");
+
+    rohwerWalkStep = 5;
+    return;
+  }
+
+  if (rohwerWalkStep === 5) {
+   kidsReflectionTip.classList.add("hidden");
+kidsReflectionTip.classList.remove("showTipBox");
+kidsReflectionTip.style.display = "none";
+    walkAroundText.classList.remove("showText");
+    walkAroundText.classList.add("fadeOutIntro");
+
+    setTimeout(() => {
+      walkAroundText.classList.remove("fadeOutIntro");
+
+      walkAroundText.innerHTML =
+        "After walking around camp, I returned to our barrack. It was hot, cramped, and nothing like the home we had left behind.";
+
+      void walkAroundText.offsetWidth;
+      walkAroundText.classList.add("showText");
+    }, 600);
+
+    rohwerWalkStep = 6;
+    return;
+  }
+
+if (rohwerWalkStep === 6) {
+
+  walkAroundText.classList.remove("showText");
+  walkAroundText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+
+    walkAroundText.classList.remove("fadeOutIntro");
+
+    walkAroundText.innerHTML =
+      "As I opened the door, I saw my mother unpacking a sewing machine from her suitcase.";
+
+    void walkAroundText.offsetWidth;
+
+    walkAroundText.classList.add("showText");
+
+  }, 600);
+
+  rohwerWalkStep = 7;
+
+  return;
+}
+
+
+if (rohwerWalkStep === 7) {
+
+  walkAroundText.classList.add("hidden");
+
+  sewingScene.classList.remove("hidden");
+
+  rohwerWalkStep = 8;
+
+  return;
+}
+
+  // keep the rest of your old act1Step code under here
+
+
+
+if (act1Step === 22) {
+  act1Step = 23;
+
+  rohwerArrivalTextBox.classList.add("hidden");
+
+  rohwerChoices.classList.remove("hidden");
+  rohwerChoices.style.display = "flex";
+
+  return;
+}
+ 
+ 
+  if (act1Step === 20) {
   act1Step = 21;
 
   continueTip.classList.add("hidden");
@@ -528,8 +827,8 @@ if (flashbackActive && act1Step === 8) {
 }
 
 
-
 });
+
 
 actsButton.addEventListener("click", () => {
   act1Step = 0;
@@ -807,6 +1106,11 @@ act2Btn.addEventListener("click", () => {
 
   hideAllScreens();
 
+  actsButton.classList.remove("hidden");
+
+  blackScreen.classList.remove("hidden");
+
+
   blackScreen.classList.remove("hidden");
   blackScreen.classList.add("show");
 
@@ -825,3 +1129,81 @@ act2Btn.addEventListener("click", () => {
 
   act1Step = 20;
 });
+
+if (mapContinueBtn) {
+  mapContinueBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    act1Step = 22;
+
+    continueTip.classList.add("hidden");
+    continueTip.classList.remove("showTip");
+
+    rohwerMapScene.classList.add("hidden");
+    rohwerMapScene.classList.remove("showMap");
+    rohwerMapScene.style.display = "none";
+
+    rohwerArrivalScene.classList.remove("hidden");
+    rohwerArrivalScene.classList.add("showArrival");
+
+    if (rohwerChoices) {
+      rohwerChoices.classList.add("hidden");
+      rohwerChoices.style.display = "none";
+    }
+
+    if (rohwerArrivalTextBox) {
+      rohwerArrivalTextBox.classList.remove("hidden");
+    }
+
+    continueTip.classList.remove("hidden");
+    continueTip.classList.add("showTip");
+  });
+}
+
+if (kidsGameScene) {
+  kidsGameScene.addEventListener("click", () => {
+    if (rohwerWalkStep !== 3) return;
+
+    kidsGameScene.classList.add("hidden");
+
+    walkAroundText.classList.remove("hidden");
+    walkAroundText.classList.remove("showText");
+
+    walkAroundText.innerHTML =
+      "The other kids looked like they were having fun, but I didn’t understand why nobody wanted to play as the Japanese soldiers. Everyone wanted to be the heroes.";
+
+    void walkAroundText.offsetWidth;
+
+    walkAroundText.classList.add("showText");
+
+    setTimeout(() => {
+      if (kidsReflectionTip) {
+        kidsReflectionTip.classList.remove("hidden");
+        kidsReflectionTip.classList.add("showTipBox");
+      }
+    }, 2000);
+
+    rohwerWalkStep = 4;
+    return;
+  });
+}
+
+if (sewingScene) {
+  sewingScene.addEventListener("click", () => {
+    if (rohwerWalkStep !== 8) return;
+
+    sewingScene.classList.add("hidden");
+
+    walkAroundText.classList.remove("hidden");
+    walkAroundText.classList.remove("showText");
+
+    walkAroundText.innerHTML =
+      "I heard my dad say earlier that sewing machines weren’t allowed in camp. Seeing my mother bring one anyway made me realize how much she cared about taking care of our family.";
+
+    void walkAroundText.offsetWidth;
+
+    walkAroundText.classList.add("showText");
+
+    rohwerWalkStep = 9;
+  });
+}

@@ -310,26 +310,27 @@ body {
 #actsButton {
   position: fixed;
 
-  top: 20px;
-  left: 20px;
+  top: 25px;
+  right: 25px;
 
-  z-index: 9999;
+  padding: 12px 18px;
 
-  padding: 10px 18px;
+  background: rgba(0,0,0,0.82);
 
-  background: rgba(0, 0, 0, 0.7);
   border: 2px solid #d8c9a7;
-  border-radius: 6px;
 
   color: #f1eadc;
 
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-family: Georgia, serif;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  z-index: 999999;
+}
+
+#actsButton.hidden {
+  display: none !important;
 }
 
 #actsButton:hover {
@@ -836,4 +837,274 @@ body {
 
 #rohwerMapScene.showMap {
   display: flex !important;
+}
+
+#mapContinueBtn {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  z-index: 500;
+}
+
+#rohwerArrivalScene {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: black;
+
+  z-index: 200;
+}
+
+#rohwerArrivalScene.showArrival {
+  display: block !important;
+  animation: textAppear 0.8s forwards;
+}
+
+#rohwerArrivalImage {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 92vw;
+  height: 92vh;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+#rohwerArrivalTextBox {
+  position: absolute;
+
+  top: 70px;
+  right: 400px;
+
+  width: 360px;
+
+  padding: 18px 22px;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  color: #f1eadc;
+
+  font-size: 1.15rem;
+  line-height: 1.45;
+
+  font-family: Georgia, serif;
+
+  z-index: 9999;
+}
+
+#rohwerChoices {
+  position: absolute;
+
+  bottom: 90px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  z-index: 9999;
+}
+
+#rohwerChoices button {
+  width: 340px;
+
+  padding: 18px 24px;
+
+  background: rgba(0,0,0,0.82);
+
+  border: 2px solid #d8c9a7;
+
+  color: #f1eadc;
+
+  font-size: 1.1rem;
+  font-family: Georgia, serif;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+#rohwerChoices button:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+#rohwerChoices.hidden {
+  display: none !important;
+}
+
+#walkAroundText {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 70%;
+
+  text-align: center;
+
+  color: #f1eadc;
+
+  font-size: 2rem;
+  line-height: 1.5;
+
+  font-family: Georgia, serif;
+
+  opacity: 0;
+
+  z-index: 9999;
+}
+
+#walkAroundText.showText {
+  animation: textAppear 0.8s forwards;
+}
+
+#kidsGameScene {
+  position: absolute;
+  inset: 0;
+
+  background: black;
+
+  z-index: 300;
+}
+
+#kidsGameImage {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 92vw;
+  height: 92vh;
+
+  object-fit: contain;
+}
+
+#kidsGameTextBox {
+  position: absolute;
+
+  bottom: 80px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 16px 24px;
+
+  background: rgba(0,0,0,0.82);
+
+  color: #f1eadc;
+
+  font-size: 1.2rem;
+  font-family: Georgia, serif;
+
+  z-index: 9999;
+}
+
+#kidsActsBtn {
+  position: absolute;
+
+  top: 30px;
+  right: 30px;
+
+  padding: 12px 18px;
+
+  background: rgba(0,0,0,0.82);
+
+  border: 2px solid #d8c9a7;
+
+  color: #f1eadc;
+
+  font-size: 1rem;
+  font-family: Georgia, serif;
+
+  cursor: pointer;
+
+  z-index: 99999;
+}
+
+#kidsActsBtn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+#kidsReflectionTip {
+  position: absolute;
+
+  top: 40px;
+  left: 40px;
+
+  width: 360px;
+
+  padding: 16px 20px;
+
+  background: rgba(0,0,0,0.82);
+
+  border: 2px solid #d8c9a7;
+
+  color: #f1eadc;
+
+  font-size: 1rem;
+  line-height: 1.45;
+
+  font-family: Georgia, serif;
+
+  opacity: 0;
+
+  z-index: 99999;
+}
+
+#kidsReflectionTip.showTipBox {
+  animation: textAppear 0.8s forwards;
+}
+
+#kidsReflectionTip.hidden {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+#sewingScene {
+  position: fixed;
+  inset: 0;
+
+  background: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 5000;
+}
+
+#sewingSceneImage {
+  width: 90vw;
+  height: 90vh;
+
+  object-fit: contain;
+
+  border: 2px solid #d8c9a7;
+}
+
+#sewingScene.hidden {
+  display: none !important;
 }
