@@ -43,6 +43,7 @@ const flashbackIntro = document.getElementById("flashbackIntro");
 const pearlHarborScene = document.getElementById("pearlHarborScene");
 const harborTextBox = document.getElementById("harborTextBox");
 const act2Btn = document.getElementById("act2Btn");
+const act3Btn = document.getElementById("act3Btn");
 
 const rohwerMapScene = document.getElementById("rohwerMapScene");
 
@@ -77,6 +78,10 @@ const q27No = document.getElementById("q27No");
 const q28Yes = document.getElementById("q28Yes");
 const q28No = document.getElementById("q28No");
 const submitQuestionnaireBtn = document.getElementById("submitQuestionnaireBtn");
+
+const victoryScene =
+  document.getElementById("victoryScene");
+
 
 let q27Answer = "";
 let q28Answer = "";
@@ -178,6 +183,12 @@ function hideAllScreens() {
   chapterScreen.classList.add("hidden");
   gameScreen.classList.add("hidden");
   afterOrderScreen.classList.add("hidden");
+
+
+if (victoryScene) {
+  victoryScene.classList.add("hidden");
+}
+
 
 if (sewingScene) {
   sewingScene.classList.add("hidden");
@@ -349,6 +360,52 @@ console.log("blackScreen clicked", {
   act1Step
 });
 
+
+if (act1Step === 31) {
+  introText.classList.add("hidden");
+  introText.classList.remove("showIntro");
+
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  victoryScene.classList.remove("hidden");
+  victoryScene.style.display = "flex";
+  victoryScene.style.zIndex = "999999";
+
+  act1Step = 32;
+
+  return;
+}
+
+
+if (act1Step === 30) {
+
+  act1Step = 31;
+
+  continueTip.classList.add("hidden");
+  continueTip.classList.remove("showTip");
+
+  introText.classList.remove("showIntro");
+  introText.classList.add("fadeOutIntro");
+
+  setTimeout(() => {
+
+    introText.classList.remove("fadeOutIntro");
+
+    introText.innerText =
+      "Tule Lake felt different from Rohwer. There were more guards, more fear, and stricter rules. We spent another year there.";
+
+    void introText.offsetWidth;
+
+    introText.classList.add("showIntro");
+
+    continueTip.classList.remove("hidden");
+    continueTip.classList.add("showTip");
+
+  }, 600);
+
+  return;
+}
 
 
 if (rohwerWalkStep === 102) {
@@ -1366,4 +1423,30 @@ if (q27Answer === "yes" && q28Answer === "yes") {
 
   void walkAroundText.offsetWidth;
   walkAroundText.classList.add("showText");
+});
+
+act3Btn.addEventListener("click", () => {
+  hideAllScreens();
+
+  actsButton.classList.remove("hidden");
+
+  blackScreen.classList.remove("hidden");
+  blackScreen.classList.add("show");
+
+  introText.innerText =
+    "Our family was transferred to Tule Lake, a camp in northern California surrounded by fences, guards, and growing tension.";
+
+  introText.classList.remove("hidden");
+  introText.classList.remove("fadeOutIntro");
+  introText.classList.remove("showIntro");
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  continueTip.classList.remove("hidden");
+  continueTip.classList.add("showTip");
+
+act1Step = 30;
+
 });

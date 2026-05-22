@@ -1200,3 +1200,29 @@ body {
 #walkAroundText.hidden {
   display: none !important;
 }
+
+#victoryScene {
+  position: fixed;
+  inset: 0;
+
+  background: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 5000;
+}
+
+#victoryScene.hidden {
+  display: none !important;
+}
+
+#victoryImage {
+  width: 55vw;
+  height: 90vh;
+
+  object-fit: contain;
+
+  border: 2px solid #d8c9a7;
+}
