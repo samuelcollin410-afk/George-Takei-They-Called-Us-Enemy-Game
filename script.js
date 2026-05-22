@@ -71,7 +71,7 @@ const kidsReflectionTip =
   const sewingScene =
   document.getElementById("sewingScene");
   
-  
+ 
 const questionnaireScene = document.getElementById("questionnaireScene");
 const q27Yes = document.getElementById("q27Yes");
 const q27No = document.getElementById("q27No");
@@ -79,9 +79,15 @@ const q28Yes = document.getElementById("q28Yes");
 const q28No = document.getElementById("q28No");
 const submitQuestionnaireBtn = document.getElementById("submitQuestionnaireBtn");
 
-const victoryScene =
-  document.getElementById("victoryScene");
 
+const endingChoices =
+  document.getElementById("endingChoices");
+
+const lookLastTimeBtn =
+  document.getElementById("lookLastTimeBtn");
+
+const prepareLeaveBtn =
+  document.getElementById("prepareLeaveBtn");
 
 let q27Answer = "";
 let q28Answer = "";
@@ -185,9 +191,6 @@ function hideAllScreens() {
   afterOrderScreen.classList.add("hidden");
 
 
-if (victoryScene) {
-  victoryScene.classList.add("hidden");
-}
 
 
 if (sewingScene) {
@@ -361,18 +364,120 @@ console.log("blackScreen clicked", {
 });
 
 
-if (act1Step === 31) {
+if (act1Step === 50) {
+
+  introText.classList.remove("showIntro");
+
+  introText.innerText =
+    "Even after leaving the camps, many Japanese American families struggled to rebuild their lives and overcome the discrimination they still faced.";
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  act1Step = 51;
+
+  return;
+}
+
+
+
+if (act1Step === 32) {
+
+  introText.innerText =
+    "The camp slowly began preparing for the war to end.";
+
+  act1Step = 33;
+
+  return;
+}
+
+if (act1Step === 33) {
+
   introText.classList.add("hidden");
   introText.classList.remove("showIntro");
 
   continueTip.classList.add("hidden");
   continueTip.classList.remove("showTip");
 
-  victoryScene.classList.remove("hidden");
-  victoryScene.style.display = "flex";
-  victoryScene.style.zIndex = "999999";
+  endingChoices.classList.remove("hidden");
+  endingChoices.style.display = "flex";
+  endingChoices.style.zIndex = "999999";
+  endingChoices.style.position = "absolute";
+
+  act1Step = 34;
+
+  return;
+}
+
+if (act1Step === 31) {
+
+  introText.classList.remove("hidden");
+  introText.classList.remove("fadeOutIntro");
+  introText.classList.remove("showIntro");
+
+  introText.innerText =
+    "1945\n\nTHE WAR HAS ENDED";
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  continueTip.classList.remove("hidden");
+  continueTip.classList.add("showTip");
 
   act1Step = 32;
+
+  return;
+}
+
+
+
+if (act1Step === 50) {
+
+  introText.classList.remove("showIntro");
+
+  introText.innerText =
+    "Even after leaving the camps, many Japanese American families struggled to rebuild their lives and overcome the discrimination they still faced.";
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  act1Step = 51;
+
+  return;
+}
+
+if (act1Step === 41) {
+
+  introText.classList.remove("showIntro");
+
+  introText.innerText =
+    "As I looked at the fence, I realized it had trapped us inside the camp. But at the same time, it had also protected us from the hatred waiting outside.";
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  act1Step = 42;
+
+  return;
+}
+
+
+if (act1Step === 42) {
+
+  introText.classList.remove("showIntro");
+
+  introText.innerText =
+    "Although the camps eventually closed, the experience changed thousands of Japanese American families forever.";
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  act1Step = 43;
 
   return;
 }
@@ -1448,5 +1553,42 @@ act3Btn.addEventListener("click", () => {
   continueTip.classList.add("showTip");
 
 act1Step = 30;
+
+});
+
+lookLastTimeBtn.addEventListener("click", () => {
+
+  endingChoices.classList.add("hidden");
+
+  introText.classList.remove("hidden");
+  introText.classList.remove("showIntro");
+
+  introText.innerText =
+    "As I walked around the camp one last time, I eventually found myself standing beside the fence.";
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  act1Step = 41;
+
+});
+
+
+prepareLeaveBtn.addEventListener("click", () => {
+
+  endingChoices.classList.add("hidden");
+
+  introText.classList.remove("hidden");
+  introText.classList.remove("showIntro");
+
+  introText.innerText =
+    "My family packed up what little we still had and left the camp. Returning home, nothing ever truly felt the same again.";
+
+  void introText.offsetWidth;
+
+  introText.classList.add("showIntro");
+
+  act1Step = 50;
 
 });
